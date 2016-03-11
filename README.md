@@ -1,2 +1,3 @@
 # elnerd
 mózg rozjebany
+ddd

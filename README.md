@@ -1,0 +1,2 @@
+# elnerd
+mózg rozjebany

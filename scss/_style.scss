@@ -5,6 +5,7 @@
 html,
 body { 
 	overflow: hidden;
+	height: 100%;
 }
 
 //
@@ -53,4 +54,45 @@ body {
 	z-index: 666999;
 	text-align: center;
 	background-color: rgba(250, 250, 250, 0.9);
+}
+
+
+//
+// REFRESH SPINNER
+//
+
+.refreshing {
+    transition: 0.2s all;
+    display: block;
+	animation: spinner 1s infinite;
+}
+
+@keyframes spinner {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+//
+// HOMEPAGE
+//
+
+body.home {
+	transition: 0.2s all;
+	height: 100%;
+	.micwrapper,
+	.micinfo  {
+		max-width: 400px;
+		width: 70%;
+		display: block;
+		margin: 30px auto 0;
+	}
+	.micinfo {
+		font-size: 34px;
+		text-align: center;
+		font-weight: 200;
+	}
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/main.css">
+		<script>window.$ = window.jQuery = require('jquery/dist/jquery.js');</script>
+		<script src="node_modules/annyang/annyang.js"></script>
+
+		<script src="js/speech.js"></script>
+
+	<body class="home">
+		<div class="micwrapper">
+			<svg class="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				 viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+			<style type="text/css">
+				.st1{fill:#4B75B9;}
+				.st0 {
+					stroke:#4B75B9;
+					animation: draw 5s infinite;
+				}
+				 @keyframes draw {
+					50% {
+						stroke-dashoffset: 0;
+					}
+				}
+			</style>
+			<path class="st0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-dasharray="10" stroke-dashoffset="90" fill="none" d="M300,360.3c27.8,0,50.2-22.5,50.2-50.2V189.5c0-27.8-22.5-50.2-50.2-50.2s-50.2,22.5-50.2,50.2V310
+				C249.8,337.8,272.2,360.3,300,360.3z"/>
+			<path class="st1" d="M370.3,279.9V310c0,38.8-31.5,70.3-70.3,70.3s-70.3-31.5-70.3-70.3v-30.1h-20.1V310c0,46.5,35.2,84.9,80.4,89.9
+				v40.8h-40.2v20.1h100.5v-20.1H310v-40.8c45.2-5,80.4-43.3,80.4-89.9v-30.1H370.3z"/>
+			</svg>
+			<div class="micinfo">
+				możesz mówić
+			</div>
+			<div class="micrecognized">
+			</div>
+		</div>
+	</body>
+</html>

@@ -47,6 +47,14 @@ body {
     }
 }
 
+.activateSpeech {
+    transition: 0.2s all;
+    transform: scale(1.0);
+    &.working {
+        transform: scale(1.2);
+    }
+}
+
 //
 // REFRESH SPINNER
 //

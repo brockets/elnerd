@@ -26,7 +26,17 @@ var commands = {
 annyang.setLanguage('pl')
 annyang.addCommands(commands);
 annyang.debug();
+
+annyang.addCallback('result', function() {
+	$('.activateSpeech').addClass('working');
+	setTimeout(function(){
+		$('.activateSpeech').removeClass('working');
+	},500);
+});
+
 annyang.start();
+
+
 
 $(document).on('click', '#actionButton', function(){
 	'use strict';

@@ -33,7 +33,9 @@ onload = function () {
         if ($('webview').is(':visible')) {
             $('webview').hide();
         }
-        navigateTo('file:index.html');
+        annyang.abort();
+        annyang.start();
+        // navigateTo('file:index.html');
     };
 
     document.querySelector('#reload').onclick = function () {

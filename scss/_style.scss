@@ -1,56 +1,10 @@
-//
-// FIXY
-//
 html,
 body {
     overflow: hidden;
     height: 100%;
 }
 
-//
-// NAVBAR
-//
-#controls {
-    background-color: #E6E6E6;
-    border-color: #E6E6E6;
-    .search-query {
-        display: inline-block;
-        width: calc(100% - 34px);
-    }
-    .submitbutton {
-        padding-bottom: 7px;
-    }
-}
-
-#location-form {
-    .navbar-form,
-    .navbar-form > div.form-group {
-        width: 100% !important;
-    }
-}
-
-//
-// HELPER CLASSES
-//
-.w100 {
-    width: 100%;
-}
-
-//
-// SPEECH OVERLAY
-//
-
-#actionButton {
-    transition: 0.2s all;
-    &.speechDisabled {
-        background-color: red;
-    }
-}
-
-//
-// REFRESH SPINNER
-//
-.loading #reload > i{
+.loading #reload > i {
     transition: 0.2s all;
     display: block;
     animation: spinner 1s infinite;
@@ -63,6 +17,15 @@ body {
     100% {
         transform: rotateZ(360deg);
     }
+}
+
+nav ul {
+    margin-left: 10px;
+}
+
+#location-form {
+    margin-left: 250px;
+    margin-right: 10px;
 }
 
 //

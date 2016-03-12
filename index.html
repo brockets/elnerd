@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <script>
         window.$ = window.jQuery = require('jquery/dist/jquery.js');
@@ -14,26 +15,26 @@
 
 <body class="home">
     <div class="navbar-fixed" id="controls">
-        <nav>
+        <nav class="light-green">
             <div class="nav-wrapper">
-                <ul class="left hide-on-med-and-down">
+                <ul class="left">
                     <li>
-                        <button id="back" disabled><i class="material-icons">keyboard_arrow_left</i></button>
+                        <a id="back" disabled><i class="material-icons">keyboard_arrow_left</i></a>
                     </li>
                     <li>
-                        <button id="forward" disabled><i class="material-icons">keyboard_arrow_right</i></button>
+                        <a id="forward" disabled><i class="material-icons">keyboard_arrow_right</i></a>
                     </li>
                     <li>
-                        <button id="reload"><i class="material-icons">refresh</i></button>
+                        <a id="reload"><i class="material-icons">refresh</i></a>
                     </li>
                     <li>
-                        <button id="home"><i class="material-icons">home</i></button>
+                        <a id="home"><i class="material-icons">home</i></a>
                     </li>
                 </ul>
-                <form id="location-form">
+                <form id="location-form" class="light-green lighten-1">
                     <div class="input-field">
                         <input id="location" type="search">
-                        <label for="search"><i class="material-icons">search</i></label>
+                        <label for="location"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
                 </form>

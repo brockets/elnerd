@@ -1,28 +1,34 @@
 {
-  "name": "electron-quick-start",
+  "name": "elnerd",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "browser for seniors",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/atom/electron-quick-start.git"
+    "url": "git+https://github.com/kamdz/elnerd.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "browser",
+    "old",
+    "elnerd",
+    "elder",
+    "senior",
+    "help"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Kamil Dzwonkowski <elnerd@kamdz.pl> (http://kamdz.pl/)",
+  "contributors": [
+    "Marcin Ciarka <elnerd@plamka.net> (http://plamka.net/)"
+  ],
   "bugs": {
-    "url": "https://github.com/atom/electron-quick-start/issues"
+    "url": "https://github.com/kamdz/elnerd/issues"
   },
-  "homepage": "https://github.com/atom/electron-quick-start#readme",
+  "homepage": "https://github.com/kamdz/elnerd",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
+    "electron-prebuilt": "^0.36.0",
+    "annyang": "git@github.com:TalAter/annyang.git",
+    "bootflat": "^2.0.4"
   }
 }

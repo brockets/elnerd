@@ -126,22 +126,24 @@ function runService(service) {
             $('.newsList').show();
         }
         $.ajax({
-                url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent('http://www.tvn24.pl/ciekawostki-michalki,5.xml'),
+                url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent('http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml'),
             })
             .done(function (data) {
                 data = JSON.parse(data);
                 data = $(data.responseData.feed.entries);
-                newsHTML = '<div class="row"><div class="col s12 cards-container">';
+                newsHTML = '<div class="row"><div class="col s12 cards-container light-green darken-4">';
                 data.each(function (dataSet) {
-                    newsHTML = newsHTML + '<div class="card light-green darken-3">\
+                    src =
+                        newsHTML = newsHTML + '<div class="card light-green lighten-5">\
                                             <div class="card-image">\
-                                                <span class="card-title">' + $(this)[0].title + '</span>\
+                                                <img src="' + ($.parseHTML($(this)[0].content)[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
+                                            <span class="card-title">' + $(this)[0].title + '</span>\
                                             </div>\
 											<div class="card-content">\
-												<p class="white-text">' + $(this)[0].contentSnippet + '</p>\
+												<p>' + $(this)[0].contentSnippet + '</p>\
 											</div>\
 											<div class="card-action">\
-												<a class = "light-green-text" href="' + $(this)[0].link + '">przeczytaj artykuł <i class="material-icons">open_in_new</i></a>\
+												<a class="light-green-text text-darken-3" href="' + $(this)[0].link + '">przeczytaj artykuł</a>\
 											</div>\
 										</div>';
                 });

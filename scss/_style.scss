@@ -64,14 +64,6 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
     .card {
         display: inline-block;
         overflow: visible;
-        .card-content {
-            .card-title {
-                line-height: 34px;
-            }
-            p {
-                margin-top: 20px;
-            }
-        }
     }
 }
 

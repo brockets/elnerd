@@ -9,8 +9,8 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         icon: 'img/ikona.png',
-        fullscreen: true,
-        skipTaskbar: true,
+        //fullscreen: true,
+        //skipTaskbar: true,
         title: 'elnerd'
     });
 

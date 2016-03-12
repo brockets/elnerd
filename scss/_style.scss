@@ -39,16 +39,12 @@ body {
 //
 // SPEECH OVERLAY
 //
-.overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 666999;
-    text-align: center;
-    background-color: rgba(250, 250, 250, 0.9);
+
+#actionButton {
+    transition: 0.2s all;
+    &.speechDisabled {
+        background-color: red;
+    }
 }
 
 //
@@ -84,6 +80,11 @@ body.home {
     }
     .micinfo {
         font-size: 34px;
+        text-align: center;
+        font-weight: 200;
+    }
+    #speechContainer {
+        font-size: 24px;
         text-align: center;
         font-weight: 200;
     }

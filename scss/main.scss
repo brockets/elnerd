@@ -3,5 +3,8 @@
 // IMPORTY
 // █████████████████████████████████████████████
 
-@import 'bootflat';
-@import 'ionicons';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../node_modules/bootflat/bootflat/scss/bootflat';
+@import '../node_modules/ionicons/scss/ionicons';
+
+@import 'style';

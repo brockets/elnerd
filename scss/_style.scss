@@ -1,0 +1,17 @@
+
+//
+// NAVBAR
+//
+
+#browser-navbar {
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+}
+
+#location-form {
+	.navbar-form,
+	input#location,
+	.navbar-form > div.form-group  {
+		width:100% !important;
+	}
+}  

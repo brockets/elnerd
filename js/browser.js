@@ -2,6 +2,7 @@ window.onresize = doLayout;
 
 var isLoading = false;
 
+
 onload = function () {
     var webview = document.querySelector('webview');
     doLayout();
@@ -38,6 +39,7 @@ onload = function () {
         }
         annyang.abort();
         annyang.start();
+        document.querySelector('#location').value = 'Strona domowa';
         // navigateTo('file:index.html');
     };
 

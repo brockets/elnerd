@@ -14,6 +14,9 @@ var commands = {
     'wydarzenia': odpalNewsy,
     'informacje': odpalNewsy,
     'lista funkcji': getHelp,
+    'powiększ stronę': enlargePage,
+    'powiększyć stronę': enlargePage,
+    'zmniejsz stronę': resetPage,
     'cofnij': back,
     'wstecz': back,
     'do tyłu': back,
@@ -39,7 +42,9 @@ $(document).on('click', '.newsList a', function(e){
     }
     if ($('webview').is(':hidden')) {
         $('webview').show();
-    	document.querySelector('webview').src = url;
+        setTimeout(function(){
+        	document.querySelector('webview').src = url;
+        }, 500);
     }
     if ($('.newsList').is(':visible')) {
         $('.newsList').hide();
@@ -58,6 +63,23 @@ function sayThanks() {
     msg.pitch = 1;
     msg.voice = voices[3];
     window.speechSynthesis.speak(msg);
+}
+
+function enlargePage() {
+	if($('webview').is(':visible')) {
+		document.querySelector('webview').executeJavaScript('document.body.style.zoom = "150%"');
+	} else {
+		return;
+	}
+}
+
+
+function resetPage() {
+	if($('webview').is(':visible')) {
+		document.querySelector('webview').executeJavaScript('document.body.style.zoom = "100%"');
+	} else {
+		return;
+	}
 }
 
 function getHelp() {
@@ -111,14 +133,17 @@ $(document).on('click', '#actionButton.speechDisabled', function () {
 
 function odpalProgram() {
     runService('program');
+     document.querySelector('#location').value = 'Program TV';
 }
 
 function odpalPlotki() {
     runService('plotki');
+     document.querySelector('#location').value = 'Plotki ;)';
 }
 
 function odpalNewsy() {
     runService('wiadomości');
+     document.querySelector('#location').value = 'Wiadomości';
 }
 
 function runService(service) {
@@ -129,16 +154,22 @@ function runService(service) {
         url = 'http://tv.wp.pl/rss.xml';
     } else if (service == 'pogodę') {
         url = 'http://pogoda.wp.pl/rss.xml';
+    	 document.querySelector('#location').value = 'Pogoda';
     } else if (service == 'horoskop') {
         url = 'http://horoskop.wp.pl/cid,1,hid,88,rss.xml';
+    	 document.querySelector('#location').value = 'Horoskop';
     } else if (service == 'sport') {
         url = 'http://sport.wp.pl/rss.xml';
+    	 document.querySelector('#location').value = 'Sport';
     } else if (service == 'niewiarygodne' || service == 'dziwne' || service == 'ciekawostki') {
         url = 'http://niewiarygodne.pl/rss.xml';
+    	 document.querySelector('#location').value = 'Ciekawostki';
     } else if (service == 'prasę' || service == 'gazety') {
         url = 'http://wiadomosci.wp.pl/kat,8131,ver,rss,rss.xml';
+    	 document.querySelector('#location').value = 'Prasa';
     } else if (service == 'naukowe' || service == 'mądre' || service == 'naukę') {
         url = 'http://wiadomosci.wp.pl/kat,18032,ver,rss,rss.xml';
+    	 document.querySelector('#location').value = 'Naukowe';
     } else if (service == 'plotki') {
         url = 'http://interia.pl.feedsportal.com/c/34004/f/625122/index.rss';
     } else {

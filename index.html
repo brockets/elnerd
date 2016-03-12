@@ -33,7 +33,7 @@
                 </ul>
                 <form id="location-form" class="light-green lighten-1">
                     <div class="input-field">
-                        <input id="location" type="search">
+                        <input id="location" type="search" value="Strona domowa">
                         <label for="location"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
@@ -45,7 +45,7 @@
     <webview src="home.html" style="display: none;"></webview>
 
     <div class="micwrapper">
-        <svg class="microphone activateSpeech" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+        <svg class="microphone activateSpeech" onClick="sayThanks();" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
             <style type="text/css">
                 .st1 {
                     fill: #8bc34a;
@@ -60,10 +60,8 @@
             <path class="st1" d="M370.3,279.9V310c0,38.8-31.5,70.3-70.3,70.3s-70.3-31.5-70.3-70.3v-30.1h-20.1V310c0,46.5,35.2,84.9,80.4,89.9
 				v40.8h-40.2v20.1h100.5v-20.1H310v-40.8c45.2-5,80.4-43.3,80.4-89.9v-30.1H370.3z" />
         </svg>
-        <div class="micinfo">
-            możesz mówić
-        </div>
         <div id="speechContainer">
+            możesz mówić
         </div>
     </div>
 

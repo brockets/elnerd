@@ -1,2 +1,2 @@
 # deploy
-`npm install && npm start`
+`npm install && sass scss/main.scss:css/main.css && npm start`

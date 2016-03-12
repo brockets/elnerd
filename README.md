@@ -2,4 +2,4 @@
 `npm install && sass scss/main.scss:css/main.css && npm start`
 
 # dev
-`sass scss/main.scss:css/main.css --sourcemap=none --watch`
+`sass --sourcemap=none --watch scss/main.scss:css/main.css`

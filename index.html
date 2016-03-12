@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/browser.js"></script>
-		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<!-- jakis dziwny fix na jquery, bo sie nie laduje na czas -->
+		<script>window.$ = window.jQuery = require('jquery/dist/jquery.js');</script>
 		<script src="node_modules/annyang/annyang.js"></script>
 
 		<script src="js/speech.js"></script>
 
 	<body>
+	<div class="overlay" style="display: none;">
+		<div class="info-text">słucham...</div>
+		<div class="recognized-text">...</div>
+	</div>
 		<nav class="navbar navbar-inverse navbar-fixed-top" id="controls">
 			<div class="container-fluid">
 				<div class="row">

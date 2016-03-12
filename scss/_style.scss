@@ -1,45 +1,45 @@
 html,
 body {
-    overflow: hidden;
-    height: 100%;
+	overflow: hidden;
+	height: 100%;
 }
 
 //
 // NAVBAR
 //
 #controls {
-    background-color: #E6E6E6;
-    border-color: #E6E6E6;
-    .search-query {
-        display: inline-block;
-        width: calc(100% - 34px);
-    }
-    .submitbutton {
-        padding-bottom: 7px;
-    }
+	background-color: #E6E6E6;
+	border-color: #E6E6E6;
+	.search-query {
+		display: inline-block;
+		width: calc(100% - 34px);
+	}
+	.submitbutton {
+		padding-bottom: 7px;
+	}
 }
 
 #location-form {
-    .navbar-form,
-    .navbar-form > div.form-group {
-        width: 100% !important;
-    }
+	.navbar-form,
+	.navbar-form > div.form-group {
+		width: 100% !important;
+	}
 }
 
 //
 // HELPER CLASSES
 //
 .w100 {
-    width: 100%;
+	width: 100%;
 }
 
 .row {
-    margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .newsList {
-    overflow: scroll;
-    max-height: 100%;
+	overflow: scroll;
+	max-height: 100%;
 }
 
 // 
@@ -58,116 +58,132 @@ $small-and-down: "only screen and (max-width : #{$small-screen})" !default;
 $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
 @mixin column-count($ct) {
-    -webkit-column-count: $ct;
-    -moz-column-count: $ct;
-    column-count: $ct;
+	-webkit-column-count: $ct;
+	-moz-column-count: $ct;
+	column-count: $ct;
 }
 
 .cards-container {
-    column-break-inside: avoid;
-    .card {
-        display: inline-block;
-        overflow: visible;
-    }
+	column-break-inside: avoid;
+	.card {
+		display: inline-block;
+		overflow: visible;
+	}
 }
 
 @media #{$small-and-down} {
-    .cards-container {
-        @include column-count(1);
-    }
+	.cards-container {
+		@include column-count(1);
+	}
 }
 
 @media #{$medium-and-up} {
-    .cards-container {
-        @include column-count(2);
-    }
+	.cards-container {
+		@include column-count(2);
+	}
 }
 
 @media #{$large-and-up} {
-    .cards-container {
-        @include column-count(3);
-    }
+	.cards-container {
+		@include column-count(3);
+	}
 }
 
 /// Styles for demo
 .text-center {
-    text-align: center;
+	text-align: center;
 }
 
 //
 // SPEECH OVERLAY
 //
 #actionButton {
-    transition: 0.2s all;
-    &.speechDisabled {
-        background-color: red;
-    }
+	transition: 0.2s all;
+	&.speechDisabled {
+		background-color: red;
+	}
 }
 
 .activateSpeech {
-    transition: 0.2s all;
-    transform: scale(1.0);
-    &.working {
-        transform: scale(1.2);
-        .st0 {
-            animation: draw 1s infinite;
-        }
-        @keyframes draw {
-            100% {
-                stroke-dashoffset: 0;
-            }
-        }
-    }
+	transition: 0.2s all;
+	transform: scale(1.0);
+	&.working {
+		transform: scale(1.2);
+		.st0 {
+			animation: draw 1s infinite;
+		}
+		@keyframes draw {
+			100% {
+				stroke-dashoffset: 0;
+			}
+		}
+	}
 }
 
 //
 // REFRESH SPINNER
 //
 .loading #reload > i {
-    transition: 0.2s all;
-    display: block;
-    animation: spinner 1s infinite;
+	transition: 0.2s all;
+	display: block;
+	animation: spinner 1s infinite;
 }
 
 @keyframes spinner {
-    0% {
-        transform: rotateZ(0deg);
-    }
-    100% {
-        transform: rotateZ(360deg);
-    }
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
 }
 
 nav ul {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 #location-form {
-    margin-left: 250px;
-    margin-right: 10px;
+	margin-left: 250px;
+	margin-right: 10px;
 }
 
 //
 // HOMEPAGE
 //
 body.home {
-    transition: 0.2s all;
-    height: 100%;
-    .micwrapper,
-    .micinfo {
-        max-width: 400px;
-        width: 70%;
-        display: block;
-        margin: 30px auto 0;
-    }
-    .micinfo {
-        font-size: 34px;
-        text-align: center;
-        font-weight: 200;
-    }
-    #speechContainer {
-        font-size: 24px;
-        text-align: center;
-        font-weight: 200;
-    }
+	transition: 0.2s all;
+	height: 100%;
+	background-image: url('../img/bg.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-size: fit;
+	.micwrapper,
+	.micinfo {
+		max-width: 400px;
+		width: 70%;
+		display: block;
+		margin: 30px auto 0;
+	}
+	.micinfo {
+		font-size: 34px;
+		text-align: center;
+		font-weight: 200;
+	}
+	#speechContainer {
+		font-size: 24px;
+		text-align: center;
+		font-weight: 200;
+	}
+}
+
+.smallModal {
+	border-radius: 10px;
+	background-color:white;
+	width:50%;
+	min-width: 400px;
+	max-width: 700px;
+	padding:10px;
+	-webkit-box-shadow: 2px 2px 0 0 rgba(0,0,0,0.2);
+	-moz-box-shadow: 2px 2px 0 0 rgba(0,0,0,0.2);
+	box-shadow: 2px 2px 0 0 rgba(0,0,0,0.2);
 }

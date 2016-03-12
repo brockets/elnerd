@@ -9,6 +9,10 @@ var commands = {
     'w telewizji': odpalProgram,
     'program telewizyjny': odpalProgram,
     'telewizja': odpalProgram,
+    'plotki': odpalPlotki,
+    'wiadomości': odpalNewsy,
+    'wydarzenia': odpalNewsy,
+    'informacje': odpalNewsy,
     'cofnij': back,
     'wstecz': back,
     'do tyłu': back,
@@ -52,12 +56,34 @@ function odpalProgram() {
     runService('program');
 }
 
+function odpalPlotki() {
+    runService('plotki');
+}
+
+function odpalNewsy() {
+    runService('wiadomości');
+}
+
 function runService(service) {
     var url = "";
     if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
         url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
     } else if (service == 'program') {
         url = 'http://tv.wp.pl/rss.xml';
+    } else if (service == 'pogodę') {
+        url = 'http://pogoda.wp.pl/rss.xml';
+    } else if (service == 'horoskop') {
+        url = 'http://horoskop.wp.pl/cid,1,hid,88,rss.xml';
+    } else if (service == 'sport') {
+        url = 'http://sport.wp.pl/rss.xml';
+    } else if (service == 'niewiarygodne' || service == 'dziwne' || service == 'ciekawostki') {
+        url = 'http://niewiarygodne.pl/rss.xml';
+    } else if (service == 'prasę' || service == 'gazety') {
+        url = 'http://wiadomosci.wp.pl/kat,8131,ver,rss,rss.xml';
+    } else if (service == 'naukowe' || service == 'mądre' || service == 'naukę') {
+        url = 'http://wiadomosci.wp.pl/kat,18032,ver,rss,rss.xml';
+    } else if (service == 'plotki') {
+        url = 'http://interia.pl.feedsportal.com/c/34004/f/625122/index.rss';
     } else {
         return false;
     }
@@ -72,16 +98,16 @@ function runService(service) {
         $('.newsList').show();
     }
     $.ajax({
-            url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent(url),
+            url: 'https://ajax.googleapis.com/ajax/services/feed/load?&output=json_xml&v=1.0&num=25&q=' + encodeURIComponent(url),
         })
         .done(function (data) {
             data = JSON.parse(data);
             data = $(data.responseData.feed.entries);
             newsHTML = '<div class="row"><div class="col s12 cards-container light-green darken-4">';
-            data.each(function (dataSet) {
+            data.each(function (index, dataSet) {
                 newsHTML = newsHTML + '<div class="card light-green lighten-5">\
                                             <div class="card-image">\
-                                                <img src="' + ($.parseHTML($(this)[0].content)[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
+                                                <img src="' + ($.parseHTML($(this)[0].content)[0].src || $($.parseHTML($(this)[0].content)[0]).find('img')[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
                                             <span class="card-title">' + $(this)[0].title + '</span>\
                                             </div>\
 											<div class="card-content">\

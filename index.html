@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="browser.js"></script>
-  <body>
-    <div id="controls">
+	<head>
+		<link rel="stylesheet" href="css/main.css">
+		<script src="js/browser.js"></script>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="browser-navbar">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-3">
+						<button class="btn navbar-btn btn-default" id="back" title="Do tyłu" disabled="true"><i class="icon ion-ios-arrow-back"></i></button>
+						<button class="btn navbar-btn btn-default" id="forward" title="Do przodu" disabled="true"><i class="icon ion-ios-arrow-forward"></i></button>
+						<button class="btn navbar-btn btn-default" id="home" title="Strona domowa"><i class="icon ion-home"></i></button>
+						<button class="btn navbar-btn btn-default" id="reload" title="Odśwież"><i class="icon ion-loop"></i></button>
+					</div>
+					<form id="location-form">
+						<div class="col-xs-6">
+							<div id="center-column" class="navbar-form">
+								<div class="form-group">
+									<input id="location" class="form-control" type="text" value="">
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-1">
+							<button class="btn navbar-btn" type="submit" title="Przejdź do strony"><i class="icon ion-play"></i></button>
+						</div>
+					</form>
+					<div class="col-xs-2">
+						<button class="btn navbar-btn btn-default" id="actionButton" title="Uruchom kontrole głosową"><i class="icon ion-android-radio-button-on"></i></button>
+					</div>
+				</div>
+			</div>
+		</nav>
 
-      <button id="back" title="Go Back" disabled="true">&#9664;</button>
-      <button id="forward" title="Go Forward" disabled="true">&#9654;</button>
-      <button id="home" title="Go Home">&#8962;</button>
-      <button id="reload" title="Reload">&#10227;</button>
+		<webview src="http://www.github.com/" style="width: 100%; height: 640px; margin-top:50px;"></webview>
 
-      <form id="location-form">
-        <div id="center-column">
-          <input id="location" type="text" value="http://www.github.com/">
-        </div>
-        <input type="submit" value="Go">
-      </form>
+		<div id="sad-webview">
+			<div id="sad-webview-icon">&#9762;</div>
+			<h2 id="crashed-label">Aw, Snap!</h2>
+			<h2 id="killed-label">He's Dead, Jim!</h2>
 
-      <button id="zoom" title="Change Zoom">&#128270;</button>
-      <button id="find" title="Find in Page">&#128294;</button>
-
-    </div>
-
-    <div id="zoom-box">
-      <form id="zoom-form">
-        <input id="zoom-text" type="text">
-        <input type="submit" value="&#128270;">
-        <button id="zoom-in">&#10133;</button>
-        <button id="zoom-out">&#10134;</button>
-      </form>
-    </div>
-
-    <div id="find-box">
-      <form id="find-form">
-        <input id="find-text" type="text">
-        <div id="find-results"></div>
-        <input type="submit" style="position:absolute; visibility:hidden">
-        <button id="match-case">aA</button>
-        <button id="find-backward">&#60;</button>
-        <button id="find-forward">&#62;</button>
-      </form>
-    </div>
-
-    <webview src="http://www.github.com/" style="width:640px; height:480px"></webview>
-
-    <div id="sad-webview">
-      <div id="sad-webview-icon">&#9762;</div>
-      <h2 id="crashed-label">Aw, Snap!</h2>
-      <h2 id="killed-label">He's Dead, Jim!</h2>
-
-      <p>Something went wrong while displaying this webpage.
-      To continue, reload or go to another page.</p>
-    </div>
-  </body>
+			<p>Something went wrong while displaying this webpage.
+			To continue, reload or go to another page.</p>
+		</div>
+	</body>
 </html>

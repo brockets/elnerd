@@ -31,6 +31,6 @@
     "annyang": "https://github.com/TalAter/annyang.git",
     "bootflat": "^2.0.4",
     "ionicons": "^2.0.1",
-    "bootstrap": "^3.3.6"
+    "bootstrap-sass": "^3.3.6"
   }
 }

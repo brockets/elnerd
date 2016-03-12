@@ -15,7 +15,13 @@ onload = function () {
     };
 
     document.querySelector('#home').onclick = function () {
-        navigateTo('file:home.html');
+        if($('.micwrapper').is(':hidden')) {
+            $('.micwrapper').show();
+        }
+        if($('webview').is(':visible')) {
+            $('webview').hide();
+        }
+        navigateTo('file:index.html');
     };
 
     document.querySelector('#reload').onclick = function () {
@@ -35,7 +41,17 @@ onload = function () {
 
     document.querySelector('#location-form').onsubmit = function (e) {
         e.preventDefault();
-        navigateTo(document.querySelector('#location').value);
+
+        if($('.micwrapper').is(':visible')) {
+            $('.micwrapper').hide();
+        }
+        if($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function(){
+                navigateTo(document.querySelector('#location').value);
+            });
+        } else {
+            navigateTo(document.querySelector('#location').value);
+        }
     };
 
     document.querySelector('#location').onfocus = function () {
@@ -60,6 +76,7 @@ function navigateTo(url) {
             document.querySelector('webview').src = "https://google.pl/search?q=" + encodeURIComponent(url);
         }
     }
+    document.querySelector('#location').value = document.querySelector('webview').src;
 }
 
 function doLayout() {
@@ -77,7 +94,7 @@ function doLayout() {
 
 function handleLoadCommit() {
     var webview = document.querySelector('webview');
-    document.querySelector('#location').value = webview.getUrl();
+    document.querySelector('#location').value = webview.getURL();
     document.querySelector('#back').disabled = !webview.canGoBack();
     document.querySelector('#forward').disabled = !webview.canGoForward();
 }
@@ -98,5 +115,8 @@ function handleLoadStop(event) {
 }
 
 function handleLoadRedirect(event) {
-    document.querySelector('#location').value = event.newUrl;
+    if(typeof(event.newUrl) !== 'undefined') {
+        // fix dla undefined w pasku adresu
+        document.querySelector('#location').value = event.newUrl;
+    }
 }

@@ -17,7 +17,7 @@ var commands = {
         			document.querySelector('webview').src = url;
 				});
 			}
-		}, 1000);
+		}, 1300);
 	},
 	'*say': function (say) {
 		$('#speechContainer').text(say);
@@ -31,7 +31,7 @@ annyang.addCallback('result', function() {
 	$('.activateSpeech').addClass('working');
 	setTimeout(function(){
 		$('.activateSpeech').removeClass('working');
-	},500);
+	},1000);
 });
 
 annyang.start();

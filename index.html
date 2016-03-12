@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <script>
         window.$ = window.jQuery = require('jquery/dist/jquery.js');
@@ -14,26 +15,26 @@
 
 <body class="home">
     <div class="navbar-fixed" id="controls">
-        <nav>
+        <nav class="light-green">
             <div class="nav-wrapper">
-                <ul class="left hide-on-med-and-down">
+                <ul class="left">
                     <li>
-                        <button id="back" disabled><i class="material-icons">keyboard_arrow_left</i></button>
+                        <a id="back" disabled><i class="material-icons">keyboard_arrow_left</i></a>
                     </li>
                     <li>
-                        <button id="forward" disabled><i class="material-icons">keyboard_arrow_right</i></button>
+                        <a id="forward" disabled><i class="material-icons">keyboard_arrow_right</i></a>
                     </li>
                     <li>
-                        <button id="reload"><i class="material-icons">refresh</i></button>
+                        <a id="reload"><i class="material-icons">refresh</i></a>
                     </li>
                     <li>
-                        <button id="home"><i class="material-icons">home</i></button>
+                        <a id="home"><i class="material-icons">home</i></a>
                     </li>
                 </ul>
-                <form id="location-form">
+                <form id="location-form" class="light-green lighten-1">
                     <div class="input-field">
                         <input id="location" type="search">
-                        <label for="search"><i class="material-icons">search</i></label>
+                        <label for="location"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
                 </form>
@@ -47,18 +48,10 @@
         <svg class="microphone activateSpeech" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
             <style type="text/css">
                 .st1 {
-                    fill: #4B75B9;
+                    fill: #8bc34a;
                 }
-                
                 .st0 {
-                    stroke: #4B75B9;
-                    animation: draw 5s infinite;
-                }
-                
-                @keyframes draw {
-                    50% {
-                        stroke-dashoffset: 0;
-                    }
+                    stroke: #8bc34a;
                 }
             </style>
             <path class="st0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-dasharray="10" stroke-dashoffset="90" fill="none" d="M300,360.3c27.8,0,50.2-22.5,50.2-50.2V189.5c0-27.8-22.5-50.2-50.2-50.2s-50.2,22.5-50.2,50.2V310

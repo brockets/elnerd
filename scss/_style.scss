@@ -1,11 +1,9 @@
-//
-// FIXY
-//
 html,
 body {
     overflow: hidden;
     height: 100%;
 }
+
 
 //
 // NAVBAR
@@ -52,6 +50,15 @@ body {
     transform: scale(1.0);
     &.working {
         transform: scale(1.2);
+        .st0 {
+            animation: draw 1s infinite;
+        }
+        
+        @keyframes draw {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
     }
 }
 
@@ -71,6 +78,15 @@ body {
     100% {
         transform: rotateZ(360deg);
     }
+}
+
+nav ul {
+    margin-left: 10px;
+}
+
+#location-form {
+    margin-left: 250px;
+    margin-right: 10px;
 }
 
 //

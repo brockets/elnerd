@@ -1,3 +1,11 @@
+//
+// FIXY
+//
+
+html,
+body { 
+	overflow: hidden;
+}
 
 //
 // NAVBAR
@@ -6,6 +14,10 @@
 #controls { 
 	background-color: #E6E6E6;
 	border-color: #E6E6E6;
+	.search-query {
+	    display: inline-block;
+	    width: calc(100% - 34px);
+	}
 }
 
 #location-form {
@@ -14,4 +26,14 @@
 	.navbar-form > div.form-group  {
 		width:100% !important;
 	}
-}  
+}
+
+
+
+//
+// HELPER CLASSES
+//
+
+.w100 {
+	width: 100%;
+}

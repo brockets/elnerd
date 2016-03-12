@@ -7,58 +7,16 @@ var commands = {
     'pokaż *usluga': runService,
     'wyświetl *usluga': runService,
     'pokaż *usluga': runService,
-    'cofnij': function (say) {
-        $('#speechContainer').text(say);
-        var webview = document.querySelector('webview');
-        if ($('webview').is(':hidden')) {
-            $('webview').fadeIn(1, function () {
-                webview.goBack();
-            });
-        } else {
-            webview.goBack();
-        }
-    },
-    'do przodu': function (say) {
-        $('#speechContainer').text(say);
-        var webview = document.querySelector('webview');
-        if ($('webview').is(':hidden')) {
-            $('webview').fadeIn(1, function () {
-                webview.goForward();
-            });
-        } else {
-            webview.goForward();
-        }
-    },
-    'przewiń w dół': function (say) {
-        $('#speechContainer').text(say);
-        var webview = document.querySelector('webview');
-        if ($('webview').is(':hidden')) {
-            if ($('.scrollable').is(':visible')) {
-                $('.scrollable').scrollTop($('.scrollable').scrollTop() + 500);
-            } else {
-                $('webview').fadeIn(1, function () {
-                    webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
-                });
-            }
-        } else {
-            webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
-        }
-    },
-    'przewiń w górę': function (say) {
-        $('#speechContainer').text(say);
-        var webview = document.querySelector('webview');
-        if ($('webview').is(':hidden')) {
-            if ($('.scrollable').is(':visible')) {
-                $('.scrollable').scrollTop($('.scrollable').scrollTop() - 500);
-            } else {
-                $('webview').fadeIn(1, function () {
-                    webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
-                });
-            }
-        } else {
-            webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
-        }
-    },
+    'cofnij': back,
+    'wstecz': back,
+    'do tyłu': back,
+    'do przodu': forward,
+    'naprzód': forward,
+    'powtórz': forward,
+    'przewiń w dół': slideDown,
+    'w dół': slideDown,
+    'przewiń w górę': slideUp,
+    'w górę': slideUp,
     '*say': function (say) {
         $('#speechContainer').text(say);
     },
@@ -95,20 +53,27 @@ function runService(service) {
     if ($('webview').is(':visible')) {
         $('webview').hide();
     }
-    if (service == 'wiadomości') {
-        if ($('.newsList').is(':hidden')) {
-            $('.newsList').show();
-        }
-        $.ajax({
-                url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent('http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml'),
-            })
-            .done(function (data) {
-                data = JSON.parse(data);
-                data = $(data.responseData.feed.entries);
-                newsHTML = '<div class="row"><div class="col s12 cards-container light-green darken-4">';
-                data.each(function (dataSet) {
-                    src =
-                        newsHTML = newsHTML + '<div class="card light-green lighten-5">\
+    var url = "";
+    if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
+        url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
+    } else if (service == 'program') {
+        url = 'http://wiadomosci.wp.pl/kat,1515,ver,rss,rss.xml';
+
+    } else {
+        return false;
+    }
+    if ($('.newsList').is(':hidden')) {
+        $('.newsList').show();
+    }
+    $.ajax({
+            url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent(url),
+        })
+        .done(function (data) {
+            data = JSON.parse(data);
+            data = $(data.responseData.feed.entries);
+            newsHTML = '<div class="row"><div class="col s12 cards-container light-green darken-4">';
+            data.each(function (dataSet) {
+                newsHTML = newsHTML + '<div class="card light-green lighten-5">\
                                             <div class="card-image">\
                                                 <img src="' + ($.parseHTML($(this)[0].content)[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
                                             <span class="card-title">' + $(this)[0].title + '</span>\
@@ -120,13 +85,12 @@ function runService(service) {
 												<a class="light-green-text text-darken-3" href="' + $(this)[0].link + '">przeczytaj artykuł</a>\
 											</div>\
 										</div>';
-                });
-
-                newsHTML = newsHTML + '</div></div>';
-
-                $('.newsList').html(newsHTML);
             });
-    }
+
+            newsHTML = newsHTML + '</div></div>';
+
+            $('.newsList').html(newsHTML);
+        });
 }
 
 function recognizePage(strona) {
@@ -157,4 +121,60 @@ function openSite(strona) {
             document.querySelector('webview').src = url;
         }
     }, 1300);
+}
+
+function slideDown(say) {
+    $('#speechContainer').text(say);
+    var webview = document.querySelector('webview');
+    if ($('webview').is(':hidden')) {
+        if ($('.scrollable').is(':visible')) {
+            $('.scrollable').scrollTop($('.scrollable').scrollTop() + 500);
+        } else {
+            $('webview').fadeIn(1, function () {
+                webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
+            });
+        }
+    } else {
+        webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
+    }
+}
+
+function slideUp(say) {
+    $('#speechContainer').text(say);
+    var webview = document.querySelector('webview');
+    if ($('webview').is(':hidden')) {
+        if ($('.scrollable').is(':visible')) {
+            $('.scrollable').scrollTop($('.scrollable').scrollTop() - 500);
+        } else {
+            $('webview').fadeIn(1, function () {
+                webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
+            });
+        }
+    } else {
+        webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
+    }
+}
+
+function back(say) {
+    $('#speechContainer').text(say);
+    var webview = document.querySelector('webview');
+    if ($('webview').is(':hidden')) {
+        $('webview').fadeIn(1, function () {
+            webview.goBack();
+        });
+    } else {
+        webview.goBack();
+    }
+}
+
+function forward(say) {
+    $('#speechContainer').text(say);
+    var webview = document.querySelector('webview');
+    if ($('webview').is(':hidden')) {
+        $('webview').fadeIn(1, function () {
+            webview.goForward();
+        });
+    } else {
+        webview.goForward();
+    }
 }

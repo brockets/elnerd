@@ -1,16 +1,16 @@
 {
-  "name": "elnerd",
-  "version": "1.0.0",
-  "description": "browser for seniors",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron main.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kamdz/elnerd.git"
-  },
-  "keywords": [
+    "name": "elnerd",
+    "version": "1.0.0",
+    "description": "browser for seniors",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kamdz/elnerd.git"
+    },
+    "keywords": [
     "browser",
     "old",
     "elnerd",
@@ -18,20 +18,18 @@
     "senior",
     "help"
   ],
-  "author": "Kamil Dzwonkowski <elnerd@kamdz.pl> (http://kamdz.pl/)",
-  "contributors": [
+    "author": "Kamil Dzwonkowski <elnerd@kamdz.pl> (http://kamdz.pl/)",
+    "contributors": [
     "Marcin Ciarka <elnerd@plamka.net> (http://plamka.net/)"
   ],
-  "bugs": {
-    "url": "https://github.com/kamdz/elnerd/issues"
-  },
-  "homepage": "https://github.com/kamdz/elnerd",
-  "devDependencies": {
-    "electron-prebuilt": "^0.36.0",
-    "annyang": "https://github.com/TalAter/annyang.git",
-    "bootflat": "^2.0.4",
-    "ionicons": "^2.0.1",
-    "jquery": "^1.11.3",
-    "bootstrap-sass": "^3.3.6"
-  }
+    "bugs": {
+        "url": "https://github.com/kamdz/elnerd/issues"
+    },
+    "homepage": "https://github.com/kamdz/elnerd",
+    "devDependencies": {
+        "electron-prebuilt": "^0.36.0",
+        "annyang": "https://github.com/TalAter/annyang.git",
+        "jquery": "^1.11.3",
+        "materialize-css": "^0.97.5"
+    }
 }

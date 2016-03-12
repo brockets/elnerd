@@ -7,11 +7,23 @@ onload = function () {
     doLayout();
 
     document.querySelector('#back').onclick = function () {
-        webview.goBack();
+        if($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function(){
+                webview.goBack();
+            });
+        } else {
+            webview.goBack();
+        }
     };
 
     document.querySelector('#forward').onclick = function () {
-        webview.goForward();
+        if($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function(){
+                webview.goForward();
+            });
+        } else {
+            webview.goForward();
+        }
     };
 
     document.querySelector('#home').onclick = function () {

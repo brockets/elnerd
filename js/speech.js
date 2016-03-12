@@ -1,6 +1,13 @@
 
 function recognizePage(strona) {
-	return 'http://facebook.pl';
+	var pages = {};
+
+	pages['facebook'] = 'http://facebook.pl';
+	pages['facebooka'] = 'http://facebook.pl';
+	pages['onet'] = 'http://onet.pl';
+	pages['wp'] = 'http://wp.pl';
+	strona = strona.toLowerCase();
+	return pages[strona];
 }
 
 var commands = {
@@ -14,10 +21,67 @@ var commands = {
 			}
 			if($('webview').is(':hidden')) {
 				$('webview').fadeIn(1, function(){
-        			document.querySelector('webview').src = url;
+					document.querySelector('webview').src = url;
 				});
+			} else {
+				document.querySelector('webview').src = url;
 			}
 		}, 1300);
+	},
+	'pokaż *usluga': function (usluga) {
+		runService(usluga);
+	},
+	'cofnij': function (say) {
+		$('#speechContainer').text(say);
+		var webview = document.querySelector('webview');
+		if($('webview').is(':hidden')) {
+			$('webview').fadeIn(1, function(){
+				webview.goBack();
+			});
+		} else {
+			webview.goBack();
+		}
+	},
+	'do przodu': function (say) {
+		$('#speechContainer').text(say);
+		var webview = document.querySelector('webview');
+		if($('webview').is(':hidden')) {
+			$('webview').fadeIn(1, function(){
+				webview.goForward();
+			});
+		} else {
+			webview.goForward();
+		}
+	},
+	'przewiń w dół': function (say) {
+		$('#speechContainer').text(say);
+		var webview = document.querySelector('webview');
+		if($('webview').is(':hidden')) {
+			if($('.scrollable').is(':visible')) {
+				$('.scrollable').scrollTop($('.scrollable').scrollTop() + 500);
+			} else {
+				$('webview').fadeIn(1, function(){
+					webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
+				});
+			}
+		} else {
+				webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop + 400");
+		}
+	},
+	'przewiń w górę': function (say) {
+		$('#speechContainer').text(say);
+		var webview = document.querySelector('webview');
+		if($('webview').is(':hidden')) {
+			if($('.scrollable').is(':visible')) {
+				$('.scrollable').scrollTop($('.scrollable').scrollTop() - 500);
+			} else {
+				$('webview').fadeIn(1, function(){
+					webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
+				});
+			}
+		} else {
+				webview.executeJavaScript("document.querySelector('body').scrollTop=document.querySelector('body').scrollTop - 400");
+		}
 	},
 	'*say': function (say) {
 		$('#speechContainer').text(say);
@@ -49,3 +113,44 @@ $(document).on('click', '#actionButton.speechDisabled', function(){
 	$(this).removeClass('speechDisabled');
 	annyang.resume();
 });
+
+function runService(service) {
+	if($('.micwrapper').is(':visible')) {
+		$('.micwrapper').hide();
+	}
+	if($('webview').is(':visible')) {
+		$('webview').hide();
+	}
+	if(service == 'wiadomości') {
+		if($('.newsList').is(':hidden')) {
+			$('.newsList').show();
+		}
+		$.ajax({
+			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&q=' + encodeURIComponent('http://www.tvn24.pl/ciekawostki-michalki,5.xml'),
+		})
+		.done(function(data) {
+			data = JSON.parse(data);
+			data = $(data.responseData.feed.entries);
+			newsHTML = '<div class="row">';
+
+			data.each(function(dataSet){
+				newsHTML = newsHTML + '<div class="col s12 m6 l4"><div class="card blue-grey darken-1">\
+											<div class="card-content white-text">\
+												<span class="card-title">' + $(this)[0].title + '</span>\
+												<p>' + $(this)[0].contentSnippet + '</p>\
+											</div>\
+											<div class="card-action">\
+												<a href="' + $(this)[0].link + '">przeczytaj artykuł</a>\
+											</div>\
+										</div></div>';
+			});
+
+			newsHTML = newsHTML + '</div>';
+			        
+			$('.newsList').html(newsHTML);
+		});
+		
+
+	}
+
+}

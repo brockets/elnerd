@@ -3,8 +3,12 @@
 // IMPORTY
 // █████████████████████████████████████████████
 
+$ionicons-font-path: "../node_modules/ionicons/fonts" !default;
+
 @import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '../node_modules/bootflat/bootflat/scss/bootflat';
 @import '../node_modules/ionicons/scss/ionicons';
 
-@import 'style';
+
+
+@import 'style'; 

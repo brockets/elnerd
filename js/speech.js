@@ -26,6 +26,22 @@ var commands = {
     },
 };
 
+$(document).on('click', '.newsList a', function(e){
+	e.preventDefault();
+	url = $(this).attr('href');
+
+    if ($('.micwrapper').is(':visible')) {
+        $('.micwrapper').hide();
+    }
+    if ($('webview').is(':hidden')) {
+        $('webview').show();
+    	document.querySelector('webview').src = url;
+    }
+    if ($('.newsList').is(':visible')) {
+        $('.newsList').hide();
+    }
+});
+
 annyang.setLanguage('pl')
 annyang.addCommands(commands);
 annyang.debug();

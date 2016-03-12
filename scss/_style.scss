@@ -156,7 +156,7 @@ body.home {
 	background-image: url('../img/bg.png');
 	background-repeat: no-repeat;
 	background-position: left center;
-	background-size: fit;
+	background-size: contain;
 	.micwrapper,
 	.micinfo {
 		max-width: 400px;
@@ -165,14 +165,15 @@ body.home {
 		margin: 30px auto 0;
 	}
 	.micinfo {
-		font-size: 34px;
+		font-size: 44px;
 		text-align: center;
-		font-weight: 200;
+		font-weight: 300;
+		width: 100%;
 	}
 	#speechContainer {
-		font-size: 24px;
+		font-size: 34px;
 		text-align: center;
-		font-weight: 200;
+		font-weight: 700;
 	}
 }
 

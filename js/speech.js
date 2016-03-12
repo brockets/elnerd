@@ -9,6 +9,10 @@ var commands = {
     'w telewizji': odpalProgram,
     'program telewizyjny': odpalProgram,
     'telewizja': odpalProgram,
+    'plotki': odpalPlotki,
+    'wiadomości': odpalNewsy,
+    'wydarzenia': odpalNewsy,
+    'informacje': odpalNewsy,
     'lista funkcji': getHelp,
     'cofnij': back,
     'wstecz': back,
@@ -48,32 +52,36 @@ annyang.debug();
 
 function sayThanks() {
     var msg = new SpeechSynthesisUtterance();
-	var voices = window.speechSynthesis.getVoices();
+    var voices = window.speechSynthesis.getVoices();
     msg.text = 'Dziękuję za uwagę. Pozdrawiam wszystkich.';
     msg.lang = 'pl';
-	msg.pitch = 1;
-	msg.voice = voices[3];
+    msg.pitch = 1;
+    msg.voice = voices[3];
     window.speechSynthesis.speak(msg);
 }
 
 function getHelp() {
 
-	helpContent = '<div style="text-align: center;">';
-		helpContent += '<h2>Lista funkcji</h2>';
+    helpContent = '<div style="text-align: center;">';
+    helpContent += '<h2>Lista funkcji</h2>';
 
-		helpContent += '<p><strong>włącz <nazwa strony> np. "włącz facebooka" </strong><br> (onet, wp, pocztę)</p>';
-		helpContent += '<p><strong>pokaż wiadomości</strong><br>(pokazuje najważniesze newsy)</p>';
-		helpContent += '<p><strong>program telewizyjny</strong><br>(pokazuje program TV)</p>';
-		helpContent += '<p><strong>w telewizji</strong><br>(pokazuje program TV)</p>';
-		helpContent += '<p><strong>wstecz / do przodu</strong><br>(pokazuje wcześniejszą/następną stronę)</p>';
-		helpContent += '<p><strong>przewiń w dół / w górę</strong></p>';
-		helpContent += '<p><strong>lista funkcji </strong><br>(pokazuję tę listę)</p>';
-	helpContent += '</div>';
+    helpContent += '<p><strong>włącz <nazwa strony> np. "włącz facebooka" </strong><br> (onet, wp, pocztę)</p>';
+    helpContent += '<p><strong>pokaż wiadomości</strong><br>(pokazuje najważniesze newsy)</p>';
+    helpContent += '<p><strong>program telewizyjny</strong><br>(pokazuje program TV)</p>';
+    helpContent += '<p><strong>w telewizji</strong><br>(pokazuje program TV)</p>';
+    helpContent += '<p><strong>wstecz / do przodu</strong><br>(pokazuje wcześniejszą/następną stronę)</p>';
+    helpContent += '<p><strong>przewiń w dół / w górę</strong></p>';
+    helpContent += '<p><strong>lista funkcji </strong><br>(pokazuję tę listę)</p>';
+    helpContent += '</div>';
 
-	uglipop({class:'smallModal', source:'html', content: helpContent});
-	setTimeout(function(){
-		$('#uglipop_overlay_wrapper').click();
-	}, 5000);
+    uglipop({
+        class: 'smallModal',
+        source: 'html',
+        content: helpContent
+    });
+    setTimeout(function () {
+        $('#uglipop_overlay_wrapper').click();
+    }, 5000);
 }
 
 
@@ -82,8 +90,8 @@ annyang.addCallback('result', function () {
     setTimeout(function () {
         $('.activateSpeech').removeClass('working');
     }, 1000);
-    if($('#uglipop_overlay_wrapper').is(':visible')) {
-    	$('#uglipop_overlay_wrapper').click();
+    if ($('#uglipop_overlay_wrapper').is(':visible')) {
+        $('#uglipop_overlay_wrapper').click();
     }
 });
 
@@ -105,12 +113,34 @@ function odpalProgram() {
     runService('program');
 }
 
+function odpalPlotki() {
+    runService('plotki');
+}
+
+function odpalNewsy() {
+    runService('wiadomości');
+}
+
 function runService(service) {
     var url = "";
     if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
         url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
     } else if (service == 'program') {
         url = 'http://tv.wp.pl/rss.xml';
+    } else if (service == 'pogodę') {
+        url = 'http://pogoda.wp.pl/rss.xml';
+    } else if (service == 'horoskop') {
+        url = 'http://horoskop.wp.pl/cid,1,hid,88,rss.xml';
+    } else if (service == 'sport') {
+        url = 'http://sport.wp.pl/rss.xml';
+    } else if (service == 'niewiarygodne' || service == 'dziwne' || service == 'ciekawostki') {
+        url = 'http://niewiarygodne.pl/rss.xml';
+    } else if (service == 'prasę' || service == 'gazety') {
+        url = 'http://wiadomosci.wp.pl/kat,8131,ver,rss,rss.xml';
+    } else if (service == 'naukowe' || service == 'mądre' || service == 'naukę') {
+        url = 'http://wiadomosci.wp.pl/kat,18032,ver,rss,rss.xml';
+    } else if (service == 'plotki') {
+        url = 'http://interia.pl.feedsportal.com/c/34004/f/625122/index.rss';
     } else {
         return false;
     }
@@ -125,16 +155,16 @@ function runService(service) {
         $('.newsList').show();
     }
     $.ajax({
-            url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=25&q=' + encodeURIComponent(url),
+            url: 'https://ajax.googleapis.com/ajax/services/feed/load?&output=json_xml&v=1.0&num=25&q=' + encodeURIComponent(url),
         })
         .done(function (data) {
             data = JSON.parse(data);
             data = $(data.responseData.feed.entries);
             newsHTML = '<div class="row"><div class="col s12 cards-container light-green darken-4">';
-            data.each(function (dataSet) {
+            data.each(function (index, dataSet) {
                 newsHTML = newsHTML + '<div class="card light-green lighten-5">\
                                             <div class="card-image">\
-                                                <img src="' + ($.parseHTML($(this)[0].content)[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
+                                                <img src="' + ($.parseHTML($(this)[0].content)[0].src || $($.parseHTML($(this)[0].content)[0]).find('img')[0].src || 'http://fakeimg.pl/398x265/558b2f/558b2f') + '">\
                                             <span class="card-title">' + $(this)[0].title + '</span>\
                                             </div>\
 											<div class="card-content">\

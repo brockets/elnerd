@@ -183,6 +183,30 @@ body.home {
         text-align: center;
         font-weight: 700;
     }
+    transition: 0.2s all;
+    height: 100%;
+    background-image: url('../img/bg.png');
+    background-repeat: no-repeat;
+    background-position: 10% 20%;
+    background-size: 30%;
+    .micwrapper,
+    .micinfo {
+        max-width: 400px;
+        width: 70%;
+        display: block;
+        margin: 30px auto 0;
+    }
+    .micinfo {
+        font-size: 44px;
+        text-align: center;
+        font-weight: 300;
+        width: 100%;
+    }
+    #speechContainer {
+        font-size: 34px;
+        text-align: center;
+        font-weight: 700;
+    }
 }
 
 .smallModal {

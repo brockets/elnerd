@@ -33,6 +33,7 @@ var commands = {
     'przewiń w górę': slideUp,
     'w górę': slideUp,
     'podziękuj': sayThanks,
+    'podziękuj ładnie': sayThanks,
     'szukaj *fraza': google,
     'wyszukaj *fraza': google,
     '*say': function (say) {
@@ -318,6 +319,9 @@ function slideUp(say) {
 
 function back(say) {
     $('#speechContainer').text(say);
+    if($('a#back').hasClass('disabled')) {
+    	return;
+    }
     var webview = document.querySelector('webview');
     if ($('webview').is(':hidden')) {
         $('webview').fadeIn(1, function () {
@@ -330,6 +334,9 @@ function back(say) {
 
 function forward(say) {
     $('#speechContainer').text(say);
+    if($('a#forward').hasClass('disabled')) {
+    	return;
+    }
     var webview = document.querySelector('webview');
     if ($('webview').is(':hidden')) {
         $('webview').fadeIn(1, function () {

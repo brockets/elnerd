@@ -8,6 +8,9 @@ onload = function () {
     doLayout();
 
     document.querySelector('#back').onclick = function () {
+        if($('#back').hasClass('disabled')) {
+            return;
+        }
         if ($('webview').is(':hidden')) {
             $('webview').fadeIn(1, function () {
                 webview.goBack();
@@ -18,6 +21,9 @@ onload = function () {
     };
 
     document.querySelector('#forward').onclick = function () {
+        if($('#forward').hasClass('disabled')) {
+            return;
+        }
         if ($('webview').is(':hidden')) {
             $('webview').fadeIn(1, function () {
                 webview.goForward();

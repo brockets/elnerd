@@ -6,7 +6,9 @@ var commands = {
     'przejdź na *strona': openSite,
     'pokaż *usluga': runService,
     'wyświetl *usluga': runService,
-    'pokaż *usluga': runService,
+    'w telewizji': odpalProgram,
+    'program telewizyjny': odpalProgram,
+    'telewizja': odpalProgram,
     'cofnij': back,
     'wstecz': back,
     'do tyłu': back,
@@ -46,21 +48,25 @@ $(document).on('click', '#actionButton.speechDisabled', function () {
     annyang.resume();
 });
 
+function odpalProgram() {
+    runService('program');
+}
+
 function runService(service) {
+    var url = "";
+    if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
+        url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
+    } else if (service == 'program') {
+        url = 'http://tv.wp.pl/rss.xml';
+    } else {
+        return false;
+    }
+
     if ($('.micwrapper').is(':visible')) {
         $('.micwrapper').hide();
     }
     if ($('webview').is(':visible')) {
         $('webview').hide();
-    }
-    var url = "";
-    if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
-        url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
-    } else if (service == 'program') {
-        url = 'http://wiadomosci.wp.pl/kat,1515,ver,rss,rss.xml';
-
-    } else {
-        return false;
     }
     if ($('.newsList').is(':hidden')) {
         $('.newsList').show();
@@ -101,6 +107,7 @@ function recognizePage(strona) {
     pages['google'] = 'http://google.pl';
     pages['onet'] = 'http://onet.pl';
     pages['wp'] = 'http://wp.pl';
+    pages['wykop'] = 'http://wykop.pl';
     strona = strona.toLowerCase();
     return pages[strona];
 }

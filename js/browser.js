@@ -15,7 +15,7 @@ onload = function () {
     };
 
     document.querySelector('#home').onclick = function () {
-        navigateTo('http://www.github.com/');
+        navigateTo('file:home.html');
     };
 
     document.querySelector('#reload').onclick = function () {
@@ -38,6 +38,11 @@ onload = function () {
         navigateTo(document.querySelector('#location').value);
     };
 
+    document.querySelector('#location').onfocus = function () {
+        this.focus();
+        this.select()
+    };
+
     webview.addEventListener('did-start-loading', handleLoadStart);
     webview.addEventListener('did-stop-loading', handleLoadStop);
     webview.addEventListener('did-get-redirect-request', handleLoadRedirect);
@@ -45,7 +50,16 @@ onload = function () {
 };
 
 function navigateTo(url) {
-    document.querySelector('webview').src = url;
+    var r = /^.+?:/;
+    if (r.test(url)) {
+        document.querySelector('webview').src = url;
+    } else {
+        if (r.test('http://' + url)) {
+            document.querySelector('webview').src = 'http://' + url;
+        } else {
+            document.querySelector('webview').src = "https://google.pl/search?q=" + encodeURIComponent(url);
+        }
+    }
 }
 
 function doLayout() {

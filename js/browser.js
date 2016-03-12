@@ -7,8 +7,8 @@ onload = function () {
     doLayout();
 
     document.querySelector('#back').onclick = function () {
-        if($('webview').is(':hidden')) {
-            $('webview').fadeIn(1, function(){
+        if ($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function () {
                 webview.goBack();
             });
         } else {
@@ -17,8 +17,8 @@ onload = function () {
     };
 
     document.querySelector('#forward').onclick = function () {
-        if($('webview').is(':hidden')) {
-            $('webview').fadeIn(1, function(){
+        if ($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function () {
                 webview.goForward();
             });
         } else {
@@ -27,10 +27,10 @@ onload = function () {
     };
 
     document.querySelector('#home').onclick = function () {
-        if($('.micwrapper').is(':hidden')) {
+        if ($('.micwrapper').is(':hidden')) {
             $('.micwrapper').show();
         }
-        if($('webview').is(':visible')) {
+        if ($('webview').is(':visible')) {
             $('webview').hide();
         }
         navigateTo('file:index.html');
@@ -54,11 +54,11 @@ onload = function () {
     document.querySelector('#location-form').onsubmit = function (e) {
         e.preventDefault();
 
-        if($('.micwrapper').is(':visible')) {
+        if ($('.micwrapper').is(':visible')) {
             $('.micwrapper').hide();
         }
-        if($('webview').is(':hidden')) {
-            $('webview').fadeIn(1, function(){
+        if ($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function () {
                 navigateTo(document.querySelector('#location').value);
             });
         } else {
@@ -102,6 +102,11 @@ function doLayout() {
 
     webview.style.width = webviewWidth + 'px';
     webview.style.height = webviewHeight + 'px';
+
+    var newsList = document.querySelector('.newsList');
+    newsList.style.width = webviewWidth + 'px';
+    newsList.style.height = webviewHeight + 'px';
+
 }
 
 function handleLoadCommit() {
@@ -127,7 +132,7 @@ function handleLoadStop(event) {
 }
 
 function handleLoadRedirect(event) {
-    if(typeof(event.newUrl) !== 'undefined') {
+    if (typeof (event.newUrl) !== 'undefined') {
         // fix dla undefined w pasku adresu
         document.querySelector('#location').value = event.newUrl;
     }

@@ -1,36 +1,12 @@
-function recognizePage(strona) {
-    var pages = {};
-
-    pages['facebook'] = 'http://facebook.pl';
-    pages['facebooka'] = 'http://facebook.pl';
-    pages['google'] = 'http://google.pl';
-    pages['onet'] = 'http://onet.pl';
-    pages['wp'] = 'http://wp.pl';
-    strona = strona.toLowerCase();
-    return pages[strona];
-}
-
 var commands = {
-    'włącz *strona': function (strona) {
-        url = recognizePage(strona);
-        $('#speechContainer').text('Przejdź do ' + strona);
-        setTimeout(function () {
-            console.log(url);
-            if ($('.micwrapper').is(':visible')) {
-                $('.micwrapper').hide();
-            }
-            if ($('webview').is(':hidden')) {
-                $('webview').fadeIn(1, function () {
-                    document.querySelector('webview').src = url;
-                });
-            } else {
-                document.querySelector('webview').src = url;
-            }
-        }, 1300);
-    },
-    'pokaż *usluga': function (usluga) {
-        runService(usluga);
-    },
+    'otwórz *strona': openSite,
+    'włącz': openSite,
+    'idź do *strona': openSite,
+    'idź na *strona': openSite,
+    'przejdź na *strona': openSite,
+    'pokaż *usluga': runService,
+    'wyświetl *usluga': runService,
+    'pokaż *usluga': runService,
     'cofnij': function (say) {
         $('#speechContainer').text(say);
         var webview = document.querySelector('webview');
@@ -100,8 +76,6 @@ annyang.addCallback('result', function () {
 
 annyang.start();
 
-
-
 $(document).on('click', '#actionButton', function () {
     'use strict';
     $(this).addClass('speechDisabled');
@@ -152,8 +126,35 @@ function runService(service) {
 
                 $('.newsList').html(newsHTML);
             });
-
-
     }
+}
 
+function recognizePage(strona) {
+    var pages = {};
+
+    pages['facebook'] = 'http://facebook.pl';
+    pages['facebooka'] = 'http://facebook.pl';
+    pages['google'] = 'http://google.pl';
+    pages['onet'] = 'http://onet.pl';
+    pages['wp'] = 'http://wp.pl';
+    strona = strona.toLowerCase();
+    return pages[strona];
+}
+
+function openSite(strona) {
+    url = recognizePage(strona);
+    $('#speechContainer').text('Przejdź do ' + strona);
+    setTimeout(function () {
+        console.log(url);
+        if ($('.micwrapper').is(':visible')) {
+            $('.micwrapper').hide();
+        }
+        if ($('webview').is(':hidden')) {
+            $('webview').fadeIn(1, function () {
+                document.querySelector('webview').src = url;
+            });
+        } else {
+            document.querySelector('webview').src = url;
+        }
+    }, 1300);
 }

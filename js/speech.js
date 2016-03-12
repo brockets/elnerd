@@ -7,6 +7,9 @@ var commands = {
     'pokaż *usluga': runService,
     'wyświetl *usluga': runService,
     'w telewizji': odpalProgram,
+    'horoskop': odpalHoroskop,
+    'pogoda': odpalPogode,
+    'ciekawostki': odpalDziwne,
     'program telewizyjny': odpalProgram,
     'telewizja': odpalProgram,
     'plotki': odpalPlotki,
@@ -14,6 +17,8 @@ var commands = {
     'wydarzenia': odpalNewsy,
     'informacje': odpalNewsy,
     'lista funkcji': getHelp,
+    'lista komend': getHelp,
+    'pomoc': getHelp,
     'powiększ stronę': enlargePage,
     'powiększyć stronę': enlargePage,
     'zmniejsz stronę': resetPage,
@@ -28,14 +33,16 @@ var commands = {
     'przewiń w górę': slideUp,
     'w górę': slideUp,
     'podziękuj': sayThanks,
+    'szukaj *fraza': google,
+    'wyszukaj *fraza': google,
     '*say': function (say) {
         $('#speechContainer').text(say);
     },
 };
 
-$(document).on('click', '.newsList a', function(e){
-	e.preventDefault();
-	url = $(this).attr('href');
+$(document).on('click', '.newsList a', function (e) {
+    e.preventDefault();
+    url = $(this).attr('href');
 
     if ($('.micwrapper').is(':visible')) {
         $('.micwrapper').hide();
@@ -45,6 +52,7 @@ $(document).on('click', '.newsList a', function(e){
         setTimeout(function(){
         	document.querySelector('webview').src = url;
         }, 500);
+        document.querySelector('webview').src = url;
     }
     if ($('.newsList').is(':visible')) {
         $('.newsList').hide();
@@ -87,13 +95,18 @@ function getHelp() {
     helpContent = '<div style="text-align: center;">';
     helpContent += '<h2>Lista funkcji</h2>';
 
-    helpContent += '<p><strong>włącz <nazwa strony> np. "włącz facebooka" </strong><br> (onet, wp, pocztę)</p>';
-    helpContent += '<p><strong>pokaż wiadomości</strong><br>(pokazuje najważniesze newsy)</p>';
-    helpContent += '<p><strong>program telewizyjny</strong><br>(pokazuje program TV)</p>';
+    helpContent += '<p><strong>otwórz <nazwa strony> np. "facebooka" </strong><br> (onet, wp, pocztę)</p>';
+    helpContent += '<p><strong>wiadomości</strong><br>(pokazuje najważniesze newsy)</p>';
+    helpContent += '<p><strong>plotki</strong><br>(gwiazdy, celebryci, skandale)</p>';
+    helpContent += '<p><strong>szukaj</strong><br>(wyszukuje frazę)</p>';
     helpContent += '<p><strong>w telewizji</strong><br>(pokazuje program TV)</p>';
+    helpContent += '<p><strong>horoskop</strong><br>(wyświetla horoskop)</p>';
+    helpContent += '<p><strong>ciekawostki</strong><br>(pokazuje ciekawe newsy ze świata)</p>';
+    helpContent += '<p><strong>pogoda</strong><br>(pokazuje pogodę)</p>';
     helpContent += '<p><strong>wstecz / do przodu</strong><br>(pokazuje wcześniejszą/następną stronę)</p>';
     helpContent += '<p><strong>przewiń w dół / w górę</strong></p>';
     helpContent += '<p><strong>lista funkcji </strong><br>(pokazuję tę listę)</p>';
+    helpContent += '<p><i>i wiele wiele innych...</i></p>';
     helpContent += '</div>';
 
     uglipop({
@@ -136,6 +149,18 @@ function odpalProgram() {
      document.querySelector('#location').value = 'Program TV';
 }
 
+function odpalDziwne() {
+    runService('dziwne');
+}
+
+function odpalPogode() {
+    runService('pogoda');
+}
+
+function odpalHoroskop() {
+    runService('horoskop');
+}
+
 function odpalPlotki() {
     runService('plotki');
      document.querySelector('#location').value = 'Plotki ;)';
@@ -146,13 +171,26 @@ function odpalNewsy() {
      document.querySelector('#location').value = 'Wiadomości';
 }
 
+function google(fraza) {
+    if ($('.micwrapper').is(':visible')) {
+        $('.micwrapper').hide();
+    }
+    if ($('webview').is(':hidden')) {
+        $('webview').fadeIn(1, function () {
+            document.querySelector('webview').src = "https://google.pl/search?q=" + encodeURIComponent(fraza);
+        });
+    } else {
+        document.querySelector('webview').src = "https://google.pl/search?q=" + encodeURIComponent(fraza);
+    }
+}
+
 function runService(service) {
     var url = "";
     if (service == 'wiadomości' || service == 'wydarzenia' || service == 'informacje') {
         url = 'http://wiadomosci.wp.pl/kat,1329,ver,rss,rss.xml';
     } else if (service == 'program') {
         url = 'http://tv.wp.pl/rss.xml';
-    } else if (service == 'pogodę') {
+    } else if (service == 'pogodę' || service == 'pogoda') {
         url = 'http://pogoda.wp.pl/rss.xml';
     	 document.querySelector('#location').value = 'Pogoda';
     } else if (service == 'horoskop') {
@@ -202,7 +240,7 @@ function runService(service) {
 												<p>' + $(this)[0].contentSnippet + '</p>\
 											</div>\
 											<div class="card-action">\
-												<a class="light-green-text text-darken-3" href="' + $(this)[0].link + '">przeczytaj artykuł</a>\
+												<a class="light-green-text text-darken-3" href="' + $(this)[0].link + '">przeczytaj więcej</a>\
 											</div>\
 										</div>';
             });

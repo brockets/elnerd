@@ -9,6 +9,7 @@ var commands = {
     'w telewizji': odpalProgram,
     'program telewizyjny': odpalProgram,
     'telewizja': odpalProgram,
+    'lista funkcji': getHelp,
     'cofnij': back,
     'wstecz': back,
     'do tyłu': back,
@@ -19,19 +20,55 @@ var commands = {
     'w dół': slideDown,
     'przewiń w górę': slideUp,
     'w górę': slideUp,
+    'podziękuj': sayThanks,
     '*say': function (say) {
         $('#speechContainer').text(say);
     },
 };
+
 annyang.setLanguage('pl')
 annyang.addCommands(commands);
 annyang.debug();
+
+function sayThanks() {
+    var msg = new SpeechSynthesisUtterance();
+	var voices = window.speechSynthesis.getVoices();
+    msg.text = 'Dziękuję za uwagę. Pozdrawiam wszystkich.';
+    msg.lang = 'pl';
+	msg.pitch = 1;
+	msg.voice = voices[3];
+    window.speechSynthesis.speak(msg);
+}
+
+function getHelp() {
+
+	helpContent = '<div style="text-align: center;">';
+		helpContent += '<h2>Lista funkcji</h2>';
+
+		helpContent += '<p><strong>włącz <nazwa strony> np. "włącz facebooka" </strong><br> (onet, wp, pocztę)</p>';
+		helpContent += '<p><strong>pokaż wiadomości</strong><br>(pokazuje najważniesze newsy)</p>';
+		helpContent += '<p><strong>program telewizyjny</strong><br>(pokazuje program TV)</p>';
+		helpContent += '<p><strong>w telewizji</strong><br>(pokazuje program TV)</p>';
+		helpContent += '<p><strong>wstecz / do przodu</strong><br>(pokazuje wcześniejszą/następną stronę)</p>';
+		helpContent += '<p><strong>przewiń w dół / w górę</strong></p>';
+		helpContent += '<p><strong>lista funkcji </strong><br>(pokazuję tę listę)</p>';
+	helpContent += '</div>';
+
+	uglipop({class:'smallModal', source:'html', content: helpContent});
+	setTimeout(function(){
+		$('#uglipop_overlay_wrapper').click();
+	}, 5000);
+}
+
 
 annyang.addCallback('result', function () {
     $('.activateSpeech').addClass('working');
     setTimeout(function () {
         $('.activateSpeech').removeClass('working');
     }, 1000);
+    if($('#uglipop_overlay_wrapper').is(':visible')) {
+    	$('#uglipop_overlay_wrapper').click();
+    }
 });
 
 annyang.start();
@@ -106,6 +143,8 @@ function recognizePage(strona) {
     pages['facebooka'] = 'http://facebook.pl';
     pages['google'] = 'http://google.pl';
     pages['onet'] = 'http://onet.pl';
+    pages['pocztę'] = 'https://accounts.google.com/ServiceLogin?service=mail#identifier';
+    pages['poczta'] = 'https://accounts.google.com/ServiceLogin?service=mail#identifier';
     pages['wp'] = 'http://wp.pl';
     pages['wykop'] = 'http://wykop.pl';
     strona = strona.toLowerCase();

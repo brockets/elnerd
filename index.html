@@ -3,6 +3,11 @@
 	<head>
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/browser.js"></script>
+		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/annyang/annyang.js"></script>
+
+		<script src="js/speech.js"></script>
+
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top" id="controls">
 			<div class="container-fluid">
@@ -28,9 +33,9 @@
 							<div class="form-group w100">
 								<div id="center-column" class="input-group form-search w100">
 									<form id="location-form">
-										<input type="text" class="form-control search-query">
+										<input type="text" class="form-control search-query" id="location">
 										<span class="input-group-btn">
-											<button type="submit"  id="location" class="btn btn-default" data-type="last"><i class="icon ion-play"></i></button>
+											<button type="submit" class="btn btn-default submitbutton" data-type="last"><i class="icon ion-play"></i></button>
 										</span>
 									</form>
 								</div>

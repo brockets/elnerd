@@ -1,86 +1,77 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-	    <meta charset="UTF-8">
-	    <link rel="stylesheet" href="css/main.css">
-	    <script>
-	        window.$ = window.jQuery = require('jquery/dist/jquery.js');
-	    </script>
-	    <script src="node_modules/annyang/annyang.js"></script>
-	    <script src="js/browser.js"></script>
-    	<script src="js/speech.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        window.$ = window.jQuery = require('jquery/dist/jquery.js');
+    </script>
+    <script src="node_modules/annyang/annyang.js"></script>
+    <script src="js/browser.js"></script>
+    <script src="js/speech.js"></script>
+</head>
 
-    <body class="home">
-        <nav class="navbar navbar-inverse navbar-fixed-top" id="controls">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xs-5 col-sm-4 col-md-3 col-lg-2">
-                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                            <div class="btn-group" role="group">
-                                <button class="btn navbar-btn btn-default" id="back" title="Do tyłu" disabled="true"><i class="icon ion-ios-arrow-back"></i></button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button class="btn navbar-btn btn-default" id="forward" title="Do przodu" disabled="true"><i class="icon ion-ios-arrow-forward"></i></button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button class="btn navbar-btn btn-default" id="home" title="Strona domowa"><i class="icon ion-home"></i></button>
-                            </div>
-                            <div class="btn-group" role="group">
-                                <button class="btn navbar-btn btn-default" id="reload" title="Odśwież"><i class="icon ion-loop"></i></button>
-                            </div>
-                        </div>
+<body class="home">
+    <div class="navbar-fixed" id="controls">
+        <nav>
+            <div class="nav-wrapper">
+                <ul class="left hide-on-med-and-down">
+                    <li>
+                        <button id="back" disabled><i class="material-icons">keyboard_arrow_left</i></button>
+                    </li>
+                    <li>
+                        <button id="forward" disabled><i class="material-icons">keyboard_arrow_right</i></button>
+                    </li>
+                    <li>
+                        <button id="reload"><i class="material-icons">refresh</i></button>
+                    </li>
+                    <li>
+                        <button id="home"><i class="material-icons">home</i></button>
+                    </li>
+                </ul>
+                <form id="location-form">
+                    <div class="input-field">
+                        <input id="location" type="search">
+                        <label for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
                     </div>
-                    <div class="col-xs-5 col-sm-6 col-md-7 col-lg-8">
-                        <div class="navbar-form">
-                            <div class="form-group w100">
-                                <div id="center-column" class="input-group form-search w100">
-                                    <form id="location-form">
-                                        <input type="text" class="form-control search-query" placeholder="wpisz adres strony..." id="location">
-                                        <span class="input-group-btn">
-											<button type="submit" class="btn btn-default submitbutton" data-type="last"><i class="icon ion-play"></i></button>
-										</span>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <button class="btn navbar-btn btn-primary pull-right" id="actionButton" title="Uruchom kontrole głosową"><i class="icon ion-android-radio-button-on"></i></button>
-                    </div>
-                </div>
+                </form>
             </div>
         </nav>
+    </div>
 
-        <webview src="home.html" style="margin-top:51px; display: none;"></webview>
+    <webview src="home.html" style="margin-top:51px; display: none;"></webview>
 
-		<div class="micwrapper">
-			<svg class="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				 viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
-			<style type="text/css">
-				.st1{fill:#4B75B9;}
-				.st0 {
-					stroke:#4B75B9;
-					animation: draw 5s infinite;
-				}
-				 @keyframes draw {
-					50% {
-						stroke-dashoffset: 0;
-					}
-				}
-			</style>
-			<path class="st0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-dasharray="10" stroke-dashoffset="90" fill="none" d="M300,360.3c27.8,0,50.2-22.5,50.2-50.2V189.5c0-27.8-22.5-50.2-50.2-50.2s-50.2,22.5-50.2,50.2V310
-				C249.8,337.8,272.2,360.3,300,360.3z"/>
-			<path class="st1" d="M370.3,279.9V310c0,38.8-31.5,70.3-70.3,70.3s-70.3-31.5-70.3-70.3v-30.1h-20.1V310c0,46.5,35.2,84.9,80.4,89.9
-				v40.8h-40.2v20.1h100.5v-20.1H310v-40.8c45.2-5,80.4-43.3,80.4-89.9v-30.1H370.3z"/>
-			</svg>
-			<div class="micinfo">
-				możesz mówić
-			</div>
-			<div id="speechContainer">
-			</div>
-		</div>
-    </body>
+    <div class="micwrapper">
+        <svg class="microphone" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve">
+            <style type="text/css">
+                .st1 {
+                    fill: #4B75B9;
+                }
+                
+                .st0 {
+                    stroke: #4B75B9;
+                    animation: draw 5s infinite;
+                }
+                
+                @keyframes draw {
+                    50% {
+                        stroke-dashoffset: 0;
+                    }
+                }
+            </style>
+            <path class="st0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="10" stroke-dasharray="10" stroke-dashoffset="90" fill="none" d="M300,360.3c27.8,0,50.2-22.5,50.2-50.2V189.5c0-27.8-22.5-50.2-50.2-50.2s-50.2,22.5-50.2,50.2V310
+				C249.8,337.8,272.2,360.3,300,360.3z" />
+            <path class="st1" d="M370.3,279.9V310c0,38.8-31.5,70.3-70.3,70.3s-70.3-31.5-70.3-70.3v-30.1h-20.1V310c0,46.5,35.2,84.9,80.4,89.9
+				v40.8h-40.2v20.1h100.5v-20.1H310v-40.8c45.2-5,80.4-43.3,80.4-89.9v-30.1H370.3z" />
+        </svg>
+        <div class="micinfo">
+            możesz mówić
+        </div>
+        <div id="speechContainer">
+        </div>
+    </div>
+</body>
 
 </html>

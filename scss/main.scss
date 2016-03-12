@@ -1,5 +1,7 @@
 // █████████████████████████████████████████████
 // IMPORTY
 // █████████████████████████████████████████████
+$roboto-font-path: "../node_modules/materialize-css/font/roboto/" !default;
+$icons-font-path: "../node_modules/materialize-css/font/material-design-icons/" !default;
 @import '../node_modules/materialize-css/sass/materialize';
 @import 'style';

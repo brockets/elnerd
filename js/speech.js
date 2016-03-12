@@ -319,7 +319,7 @@ function slideUp(say) {
 
 function back(say) {
     $('#speechContainer').text(say);
-    if($('a.back').hasClass('disabled')) {
+    if($('a#back').hasClass('disabled')) {
     	return;
     }
     var webview = document.querySelector('webview');
@@ -334,7 +334,7 @@ function back(say) {
 
 function forward(say) {
     $('#speechContainer').text(say);
-    if($('a.forward').hasClass('disabled')) {
+    if($('a#forward').hasClass('disabled')) {
     	return;
     }
     var webview = document.querySelector('webview');

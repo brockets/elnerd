@@ -1,6 +1,6 @@
 var commands = {
     'otwórz *strona': openSite,
-    'włącz': openSite,
+    'włącz *strona': openSite,
     'idź do *strona': openSite,
     'idź na *strona': openSite,
     'przejdź na *strona': openSite,
